@@ -1,1 +1,659 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>結婚相談所グッドマッチ | あなたの"これから"に、最高の出会いを。</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='35' cy='50' r='22' fill='none' stroke='%2392CEDD' stroke-width='10'/><circle cx='65' cy='50' r='22' fill='none' stroke='%23C5A059' stroke-width='10'/></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --sky: #92CEDD;
+            --sky-dark: #5aaec4;
+            --sky-mid: #6bbdd0;
+            --sky-pale: #e8f6fa;
+            --sky-soft: #c8e9f2;
+            --gold: #C5A059;
+            --gold-light: #d9b87a;
+            --gold-pale: #fdf8ee;
+            --gold-glow: rgba(197,160,89,0.2);
+            --text-main: #2d4a54;
+            --text-sub: #5a8090;
+            --text-light: #8ab5c2;
+            --border: #d0e9f0;
+            --white: #ffffff;
+            --off-white: #fdfcfa;
+            --bg-gray: #f4f9fb;
+            --red-accent: #e05c5c;
+            --radius: 12px;
+            --radius-lg: 20px;
+            --font-serif: 'Shippori Mincho', serif;
+            --font-sans: 'Zen Kaku Gothic New', sans-serif;
+            --max-w: 1100px;
+            --section-py: clamp(56px, 9vw, 96px);
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-sans); color: var(--text-main); background: var(--off-white); line-height: 1.8; font-size: 15px; -webkit-font-smoothing: antialiased; }
+        img { max-width: 100%; display: block; }
+        a { text-decoration: none; color: inherit; }
+        .container { max-width: var(--max-w); margin: 0 auto; padding: 0 clamp(16px, 5vw, 40px); }
 
+        /* ── HEADER ── */
+        .header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.96); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 2px solid var(--sky-soft); transition: box-shadow 0.3s; }
+        .header.scrolled { box-shadow: 0 2px 20px rgba(146,206,221,0.25); }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; gap: 16px; }
+        .logo-wrap { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+        .logo-svg-icon { width: 36px; height: 36px; }
+        .logo { font-family: var(--font-serif); font-weight: 700; color: var(--sky-dark); letter-spacing: 0.05em; line-height: 1.15; }
+        .logo small { display: block; font-family: var(--font-sans); font-size: 10px; font-weight: 500; color: var(--text-light); letter-spacing: 0.18em; margin-bottom: 1px; }
+        .logo strong { display: block; font-size: 20px; }
+        .nav-links { display: flex; align-items: center; gap: 20px; }
+        .nav-links a { font-size: 13px; font-weight: 500; color: var(--text-sub); letter-spacing: 0.04em; transition: color 0.2s; white-space: nowrap; }
+        .nav-links a:hover { color: var(--sky-dark); }
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+        .hamburger span { display: block; width: 22px; height: 2px; background: var(--sky-dark); border-radius: 2px; transition: all 0.3s; }
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+        .mobile-nav { display: none; position: fixed; top: 61px; left: 0; right: 0; background: rgba(255,255,255,0.99); border-bottom: 2px solid var(--sky-soft); z-index: 99; padding: 16px 24px 20px; flex-direction: column; }
+        .mobile-nav.open { display: flex; }
+        .mobile-nav a { display: block; padding: 13px 0; font-size: 15px; font-weight: 500; color: var(--text-main); border-bottom: 1px solid var(--sky-pale); }
+        .mobile-nav a.btn-sky { border-bottom: none; margin-top: 12px; text-align: center; border-radius: 50px; }
+
+        /* ── BUTTONS ── */
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 7px; font-family: var(--font-sans); font-weight: 700; border: none; cursor: pointer; transition: all 0.25s; text-align: center; }
+        .btn-sky { background: linear-gradient(135deg, var(--sky-dark), var(--sky)); color: #fff; padding: 11px 24px; border-radius: 50px; font-size: 14px; box-shadow: 0 3px 14px rgba(90,174,196,0.35); }
+        .btn-sky:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(90,174,196,0.45); }
+        .btn-white { background: #fff; color: var(--sky-dark); padding: 14px 32px; border-radius: 50px; font-size: 15px; box-shadow: 0 4px 18px rgba(0,0,0,0.1); }
+        .btn-white:hover { transform: translateY(-2px); box-shadow: 0 6px 26px rgba(0,0,0,0.15); }
+        .btn-outline-white { background: transparent; color: #fff; padding: 13px 30px; border-radius: 50px; font-size: 15px; border: 2px solid rgba(255,255,255,0.7); }
+        .btn-outline-white:hover { background: rgba(255,255,255,0.15); }
+        .btn-gold { background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: #fff; padding: 14px 34px; border-radius: 50px; font-size: 16px; box-shadow: 0 4px 18px var(--gold-glow); }
+        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 7px 26px rgba(197,160,89,0.35); }
+        .btn-sky-outline { background: transparent; color: var(--sky-dark); padding: 14px 32px; border-radius: 50px; font-size: 15px; border: 2px solid var(--sky); }
+        .btn-sky-outline:hover { background: var(--sky-pale); }
+
+        /* ── HERO ── */
+        .hero { position: relative; min-height: 100svh; display: flex; align-items: center; overflow: hidden; padding-top: 61px;
+            background: linear-gradient(160deg, var(--sky-pale) 0%, #d4eef6 40%, var(--sky-soft) 100%); }
+        .hero-wave { position: absolute; bottom: -1px; left: 0; right: 0; }
+        .hero-deco-circle { position: absolute; border-radius: 50%; pointer-events: none; }
+        .hero-deco-1 { width: 520px; height: 520px; top: -120px; right: -80px; background: radial-gradient(circle, rgba(146,206,221,0.35) 0%, transparent 70%); }
+        .hero-deco-2 { width: 300px; height: 300px; bottom: 60px; left: -60px; background: radial-gradient(circle, rgba(197,160,89,0.12) 0%, transparent 70%); }
+        .hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; position: relative; z-index: 2; padding: 48px 0; }
+        .hero-content { }
+        .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.85); border: 1px solid var(--sky-soft); padding: 5px 13px; border-radius: 50px; font-size: 11px; font-weight: 700; color: var(--sky-dark); box-shadow: 0 2px 8px rgba(146,206,221,0.2); }
+        .hero-badge svg { width: 11px; height: 11px; fill: var(--gold); }
+        .hero h1 { font-family: var(--font-serif); font-size: clamp(26px, 4.2vw, 50px); font-weight: 800; line-height: 1.42; margin-bottom: 18px; color: var(--text-main); letter-spacing: 0.02em; }
+        .hero h1 em { font-style: normal; color: var(--sky-dark); }
+        .hero-sub { font-size: clamp(14px, 1.6vw, 16px); line-height: 1.9; color: var(--text-sub); margin-bottom: 28px; }
+        .hero-price-card { background: #fff; border: 2px solid var(--sky-soft); border-radius: var(--radius-lg); padding: 20px 26px; margin-bottom: 26px; display: inline-block; box-shadow: 0 4px 18px rgba(146,206,221,0.18); }
+        .hero-price-label { font-size: 11px; color: var(--sky-dark); font-weight: 700; letter-spacing: 0.12em; margin-bottom: 6px; text-transform: uppercase; }
+        .hero-price-value { font-family: var(--font-serif); font-size: 15px; font-weight: 600; color: var(--text-main); }
+        .hero-price-value strong { font-size: clamp(32px, 5vw, 44px); font-weight: 800; color: var(--sky-dark); margin: 0 3px; }
+        .hero-price-value small { font-size: 13px; font-weight: 400; color: var(--text-light); }
+        .hero-cta-row { display: flex; flex-wrap: wrap; gap: 12px; }
+        .hero-visual { display: flex; align-items: center; justify-content: center; position: relative; }
+        .hero-visual-card { background: #fff; border-radius: 24px; padding: 36px 32px; box-shadow: 0 12px 48px rgba(146,206,221,0.3); text-align: center; max-width: 320px; width: 100%; }
+        .hero-visual-rings { margin-bottom: 20px; }
+        .hero-visual-title { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--text-main); margin-bottom: 8px; }
+        .hero-visual-sub { font-size: 13px; color: var(--text-sub); line-height: 1.7; }
+        .hero-stat-row { display: flex; justify-content: center; gap: 24px; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--sky-pale); }
+        .hero-stat { text-align: center; }
+        .hero-stat-num { font-family: var(--font-serif); font-size: 26px; font-weight: 800; color: var(--sky-dark); line-height: 1.1; }
+        .hero-stat-num small { font-size: 13px; font-weight: 400; }
+        .hero-stat-label { font-size: 10px; color: var(--text-light); margin-top: 2px; }
+
+        /* ── TRUST BAR ── */
+        .trust-bar { background: var(--sky-dark); }
+        .trust-bar-inner { display: grid; grid-template-columns: repeat(4, 1fr); text-align: center; }
+        .trust-item { padding: 24px 12px; border-right: 1px solid rgba(255,255,255,0.15); color: #fff; }
+        .trust-item:last-child { border-right: none; }
+        .trust-icon { display: flex; justify-content: center; margin-bottom: 6px; }
+        .trust-num { font-family: var(--font-serif); font-size: clamp(20px, 3vw, 34px); font-weight: 800; color: #fff; line-height: 1.2; }
+        .trust-num small { font-size: clamp(11px, 1.2vw, 14px); font-weight: 400; }
+        .trust-label { font-size: clamp(10px, 1vw, 12px); color: rgba(255,255,255,0.72); margin-top: 3px; letter-spacing: 0.03em; }
+
+        /* ── SECTION COMMON ── */
+        .section { padding: var(--section-py) 0; }
+        .section-white { background: var(--white); }
+        .section-pale { background: var(--sky-pale); }
+        .section-gray { background: var(--bg-gray); }
+        .section-sky { background: linear-gradient(160deg, var(--sky-dark) 0%, var(--sky-mid) 100%); color: #fff; }
+        .section-header { text-align: center; margin-bottom: clamp(32px, 5vw, 60px); }
+        .section-tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.2em; color: var(--sky-dark); background: var(--sky-pale); border: 1px solid var(--sky-soft); padding: 4px 16px; border-radius: 50px; margin-bottom: 14px; }
+        .section-tag.light { color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.3); }
+        .section-title { font-family: var(--font-serif); font-size: clamp(22px, 3.2vw, 34px); font-weight: 700; color: var(--text-main); line-height: 1.5; margin-bottom: 10px; }
+        .section-title.light { color: #fff; }
+        .section-sub { font-size: 14px; color: var(--text-sub); max-width: 580px; margin: 0 auto; }
+        .section-sub.light { color: rgba(255,255,255,0.75); }
+
+        /* ── PERSONA ── */
+        .persona-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 28px; }
+        .persona-card { background: var(--white); border-radius: var(--radius); padding: 24px 20px; border: 1px solid var(--border); transition: transform 0.2s, box-shadow 0.2s; }
+        .persona-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(146,206,221,0.2); }
+        .persona-icon { width: 50px; height: 50px; background: var(--sky-pale); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+        .persona-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 8px; color: var(--text-main); line-height: 1.5; }
+        .persona-card p { font-size: 13px; color: var(--text-sub); }
+        .persona-message { background: #fff; border: 2px solid var(--sky-soft); border-radius: var(--radius-lg); padding: 24px 28px; box-shadow: 0 4px 16px rgba(146,206,221,0.12); }
+        .persona-message p { font-family: var(--font-serif); font-size: clamp(15px, 1.8vw, 17px); font-weight: 600; color: var(--text-main); line-height: 1.9; }
+
+        /* ── FEATURES ── */
+        .features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .feature-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 30px 26px; transition: all 0.3s; position: relative; overflow: hidden; }
+        .feature-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(180deg, var(--sky), var(--sky-dark)); opacity: 0; transition: opacity 0.3s; }
+        .feature-card:hover { border-color: var(--sky); box-shadow: 0 8px 28px rgba(146,206,221,0.18); }
+        .feature-card:hover::before { opacity: 1; }
+        .feature-num { font-family: var(--font-serif); font-size: 30px; font-weight: 800; color: var(--sky); opacity: 0.4; line-height: 1; margin-bottom: 10px; }
+        .feature-card h3 { font-size: 16px; font-weight: 700; color: var(--text-main); margin-bottom: 8px; }
+        .feature-card p { font-size: 13px; color: var(--text-sub); line-height: 1.85; }
+
+        /* ── MID CTA ── */
+        .mid-cta { background: var(--sky-pale); padding: 40px 0; text-align: center; border-top: 2px solid var(--sky-soft); border-bottom: 2px solid var(--sky-soft); }
+        .mid-cta p { font-family: var(--font-serif); font-size: clamp(15px, 2.2vw, 19px); font-weight: 600; color: var(--text-main); margin-bottom: 18px; }
+
+        /* ── PLAN ── */
+        .plan-header-price { text-align: center; margin-bottom: 40px; }
+        .plan-price-box { display: inline-block; background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.3); border-radius: var(--radius-lg); padding: 18px 40px; margin-top: 16px; }
+        .plan-price-main { font-family: var(--font-serif); font-size: clamp(14px, 1.8vw, 16px); color: #fff; }
+        .plan-price-main strong { font-size: clamp(36px, 5vw, 50px); font-weight: 800; color: #fff; margin: 0 4px; }
+        .plan-price-note { font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 6px; }
+        .plan-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+        .plan-step { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.22); border-radius: var(--radius-lg); padding: 30px 22px; text-align: center; position: relative; transition: all 0.3s; }
+        .plan-step:hover { background: rgba(255,255,255,0.2); }
+        .step-num { font-family: var(--font-serif); font-size: 44px; font-weight: 800; color: rgba(255,255,255,0.08); position: absolute; top: 8px; left: 14px; line-height: 1; }
+        .step-icon { width: 54px; height: 54px; background: rgba(255,255,255,0.18); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+        .plan-step h4 { font-size: 15px; font-weight: 700; margin-bottom: 8px; color: #fff; }
+        .plan-step p { font-size: 13px; color: rgba(255,255,255,0.72); line-height: 1.8; }
+        .plan-after { margin-top: 28px; padding: 20px 24px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: var(--radius); font-size: 14px; color: rgba(255,255,255,0.8); }
+        .plan-after strong { color: #fff; }
+
+        /* ── TESTIMONIALS ── */
+        .testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+        .testimonial-card { background: var(--white); border-radius: var(--radius-lg); padding: 26px 22px; border: 1px solid var(--border); position: relative; transition: box-shadow 0.2s; }
+        .testimonial-card:hover { box-shadow: 0 6px 22px rgba(146,206,221,0.18); }
+        .testimonial-card::before { content: '\201C'; font-family: var(--font-serif); font-size: 52px; color: var(--sky); opacity: 0.2; position: absolute; top: 8px; left: 18px; line-height: 1; }
+        .testimonial-meta { display: flex; align-items: center; gap: 11px; margin-bottom: 12px; }
+        .testimonial-avatar { width: 40px; height: 40px; background: var(--sky-pale); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-size: 14px; font-weight: 700; color: var(--sky-dark); flex-shrink: 0; border: 2px solid var(--sky-soft); }
+        .testimonial-info .t-name { font-weight: 700; font-size: 13px; color: var(--text-main); }
+        .testimonial-info .t-detail { font-size: 11px; color: var(--text-light); }
+        .testimonial-card blockquote { font-size: 13px; color: var(--text-sub); line-height: 1.9; padding-top: 4px; }
+        .testimonial-result { margin-top: 13px; display: inline-flex; align-items: center; gap: 5px; background: var(--sky-pale); color: var(--sky-dark); font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 50px; border: 1px solid var(--sky-soft); }
+        .testimonial-result svg { width: 10px; height: 10px; fill: var(--gold); }
+
+        /* ── PRICING ── */
+        .pricing-table { max-width: 680px; margin: 0 auto; }
+        .price-group { margin-bottom: 24px; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 2px 12px rgba(146,206,221,0.08); }
+        .price-group-header { background: var(--sky-dark); color: #fff; padding: 14px 24px; font-weight: 700; font-size: 14px; }
+        .price-group-header.secondary { background: var(--sky-pale); color: var(--text-main); }
+        .price-row { display: flex; align-items: center; padding: 15px 24px; border-bottom: 1px solid var(--sky-pale); }
+        .price-row:last-child { border-bottom: none; }
+        .price-row.total { background: var(--sky-pale); }
+        .price-label { flex: 1; font-size: 14px; color: var(--text-sub); }
+        .price-label.bold { font-weight: 700; color: var(--text-main); }
+        .price-value { font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: var(--text-main); }
+        .price-value small { font-size: 13px; font-weight: 400; color: var(--text-sub); }
+        .price-zero { text-align: center; margin-top: 16px; padding: 16px 20px; background: var(--white); border-radius: var(--radius); border: 2px solid var(--sky-soft); font-weight: 700; color: var(--sky-dark); font-size: 16px; box-shadow: 0 2px 10px rgba(146,206,221,0.1); }
+
+        /* ── FAQ ── */
+        .faq-list { max-width: 680px; margin: 0 auto; }
+        .faq-item { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 10px; overflow: hidden; transition: box-shadow 0.2s; }
+        .faq-item.open { box-shadow: 0 4px 16px rgba(146,206,221,0.15); border-color: var(--sky-soft); }
+        .faq-q { padding: 17px 20px; font-weight: 700; font-size: 14px; color: var(--text-main); cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 10px; user-select: none; }
+        .faq-q-label { display: flex; align-items: center; gap: 10px; flex: 1; }
+        .faq-q-icon { width: 26px; height: 26px; background: var(--sky-pale); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-family: var(--font-serif); font-size: 12px; font-weight: 700; color: var(--sky-dark); }
+        .faq-item.open .faq-q { color: var(--sky-dark); }
+        .faq-arrow { width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; transition: transform 0.3s; color: var(--text-light); flex-shrink: 0; }
+        .faq-arrow svg { width: 14px; height: 14px; }
+        .faq-item.open .faq-arrow { transform: rotate(180deg); color: var(--sky-dark); }
+        .faq-a { display: none; padding: 0 20px 16px 56px; font-size: 14px; color: var(--text-sub); line-height: 1.9; }
+        .faq-item.open .faq-a { display: block; }
+
+        /* ── FINAL CTA ── */
+        .final-cta { background: linear-gradient(160deg, var(--sky-pale) 0%, var(--sky-soft) 100%); padding: var(--section-py) 0; position: relative; overflow: hidden; }
+        .final-cta::before { content: ''; position: absolute; top: -80px; right: -80px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(197,160,89,0.1), transparent 70%); border-radius: 50%; pointer-events: none; }
+        .final-cta-inner { position: relative; z-index: 2; text-align: center; }
+        .final-cta h2 { font-family: var(--font-serif); font-size: clamp(22px, 3.5vw, 38px); font-weight: 700; color: var(--text-main); margin-bottom: 12px; line-height: 1.5; }
+        .final-cta-sub { font-size: clamp(14px, 1.6vw, 15px); color: var(--text-sub); margin-bottom: 36px; line-height: 1.9; }
+        .cta-card { display: inline-block; background: #fff; border-radius: 24px; padding: clamp(24px, 4vw, 44px) clamp(20px, 5vw, 52px); max-width: 520px; width: 100%; text-align: center; box-shadow: 0 12px 40px rgba(146,206,221,0.22); border: 1px solid var(--sky-soft); }
+        .cta-methods { display: flex; flex-direction: column; gap: 14px; }
+        .cta-tel-label { font-size: 11px; font-weight: 700; color: var(--text-sub); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
+        .cta-phone { font-family: var(--font-serif); font-size: clamp(24px, 3.5vw, 34px); font-weight: 800; color: var(--gold); display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .cta-phone svg { width: 24px; height: 24px; color: var(--gold); }
+        .cta-phone-sub { font-size: 12px; color: var(--text-light); margin-top: 3px; }
+        .cta-divider { display: flex; align-items: center; gap: 10px; color: var(--text-light); font-size: 12px; }
+        .cta-divider::before, .cta-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+        .cta-safety { font-size: 12px; color: var(--text-light); margin-top: 14px; }
+
+        /* ── COMPANY ── */
+        .company-grid { max-width: 680px; margin: 0 auto; }
+        .company-table { width: 100%; margin-bottom: 24px; }
+        .company-table tr { border-bottom: 1px solid var(--border); }
+        .company-table th { padding: 13px 0; font-size: 13px; font-weight: 700; color: var(--text-sub); width: 90px; vertical-align: top; text-align: left; }
+        .company-table td { padding: 13px 0; font-size: 14px; color: var(--text-main); }
+        .affiliation-badges { display: flex; flex-direction: column; gap: 10px; margin-top: 18px; }
+        .affiliation-badge { display: flex; align-items: center; gap: 10px; padding: 11px 14px; background: var(--sky-pale); border-radius: var(--radius); font-size: 12px; color: var(--text-main); font-weight: 500; border: 1px solid var(--sky-soft); }
+        .affiliation-badge svg { width: 15px; height: 15px; fill: var(--gold); flex-shrink: 0; }
+
+        /* ── FOOTER ── */
+        .footer { background: var(--sky-dark); padding: 36px 0; font-size: 12px; text-align: center; color: rgba(255,255,255,0.6); }
+        .footer-logo-wrap { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 10px; }
+        .footer-logo-text { font-family: var(--font-serif); font-size: 16px; font-weight: 700; color: rgba(255,255,255,0.9); }
+
+        /* ── MOBILE FIXED CTA ── */
+        .mobile-cta-bar { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 99; background: #fff; border-top: 2px solid var(--sky-soft); padding: 10px 16px; gap: 8px; box-shadow: 0 -4px 16px rgba(0,0,0,0.08); }
+        .mobile-cta-bar .btn { flex: 1; font-size: 13px; padding: 12px 8px; }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-up { opacity: 0; animation: fadeUp 0.7s ease forwards; }
+        .delay-1 { animation-delay: 0.1s; } .delay-2 { animation-delay: 0.2s; } .delay-3 { animation-delay: 0.3s; } .delay-4 { animation-delay: 0.4s; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 960px) {
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .hero-inner { grid-template-columns: 1fr; text-align: center; }
+            .hero-visual { display: none; }
+            .hero-badges { justify-content: center; }
+            .hero-cta-row { justify-content: center; }
+            .testimonial-grid { grid-template-columns: repeat(2, 1fr); }
+            .persona-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 640px) {
+            .trust-bar-inner { grid-template-columns: repeat(2, 1fr); }
+            .trust-item { padding: 16px 8px; }
+            .trust-item:nth-child(2) { border-right: none; }
+            .trust-item:nth-child(3) { border-top: 1px solid rgba(255,255,255,0.12); border-right: 1px solid rgba(255,255,255,0.15); }
+            .trust-item:nth-child(4) { border-top: 1px solid rgba(255,255,255,0.12); border-right: none; }
+            .features-grid { grid-template-columns: 1fr; }
+            .plan-steps { grid-template-columns: 1fr; }
+            .company-grid { grid-template-columns: 1fr; }
+            .testimonial-grid { grid-template-columns: 1fr; }
+            .persona-grid { grid-template-columns: 1fr; }
+            .mobile-cta-bar { display: flex; }
+            body { padding-bottom: 64px; }
+            .hero-price-card { display: block; }
+            .hero-cta-row .btn { width: 100%; justify-content: center; }
+        }
+        @media (max-width: 380px) { .logo small { display: none; } }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header" id="header">
+    <div class="container header-inner">
+        <a href="#" class="logo-wrap">
+            <svg class="logo-svg-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="36" cy="50" r="20" fill="none" stroke="#92CEDD" stroke-width="10"/>
+                <circle cx="64" cy="50" r="20" fill="none" stroke="#C5A059" stroke-width="10"/>
+            </svg>
+            <div class="logo"><small>結婚相談所</small><strong>グッドマッチ</strong></div>
+        </a>
+        <nav class="nav-links">
+            <a href="#features">選ばれる理由</a>
+            <a href="#plan">体験プラン</a>
+            <a href="#testimonials">成婚者の声</a>
+            <a href="#pricing">料金案内</a>
+            <a href="#faq">よくある質問</a>
+            <a href="#cta-phone" class="btn btn-sky">無料相談を予約</a>
+        </nav>
+        <button class="hamburger" id="hamburger" aria-label="メニュー">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</header>
+
+<nav class="mobile-nav" id="mobileNav">
+    <a href="#features" onclick="closeMenu()">選ばれる理由</a>
+    <a href="#plan" onclick="closeMenu()">体験プラン</a>
+    <a href="#testimonials" onclick="closeMenu()">成婚者の声</a>
+    <a href="#pricing" onclick="closeMenu()">料金案内</a>
+    <a href="#faq" onclick="closeMenu()">よくある質問</a>
+    <a href="#cta-phone" class="btn btn-sky" onclick="closeMenu()">無料相談を予約</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-deco-circle hero-deco-1"></div>
+    <div class="hero-deco-circle hero-deco-2"></div>
+    <div class="container">
+        <div class="hero-inner">
+            <div class="hero-content">
+                <div class="hero-badges fade-up">
+                    <span class="hero-badge"><svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>内閣府認定NPO法人 正会員</span>
+                    <span class="hero-badge"><svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>日本仲人協会 加盟店</span>
+                </div>
+                <h1 class="fade-up delay-1">あなたの<em>"これから"</em>に、<br>最高の出会いを。</h1>
+                <p class="hero-sub fade-up delay-2">静岡・藤枝を拠点に、約7,000名の会員ネットワークから<br>あなたにぴったりの生涯のパートナーをお探しします。</p>
+                <div class="hero-price-card fade-up delay-3">
+                    <div class="hero-price-label">まずは気軽に始められる体験プラン</div>
+                    <div class="hero-price-value">2か月間 合計<strong>8,800</strong>円<small>（税込）</small></div>
+                </div>
+                <div class="hero-cta-row fade-up delay-4">
+                    <a href="#cta-phone" class="btn btn-gold">まずは無料相談に申し込む</a>
+                    <a href="#plan" class="btn btn-sky-outline">プランを詳しく見る</a>
+                </div>
+            </div>
+            <div class="hero-visual fade-up delay-2">
+                <div class="hero-visual-card">
+                    <div class="hero-visual-rings">
+                        <svg width="80" height="60" viewBox="0 0 100 70" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="35" cy="35" r="24" fill="none" stroke="#92CEDD" stroke-width="10"/>
+                            <circle cx="65" cy="35" r="24" fill="none" stroke="#C5A059" stroke-width="10"/>
+                        </svg>
+                    </div>
+                    <div class="hero-visual-title">結婚相談所 グッドマッチ</div>
+                    <div class="hero-visual-sub">静岡・藤枝から、あなたの<br>幸せな出会いをお届けします</div>
+                    <div class="hero-stat-row">
+                        <div class="hero-stat"><div class="hero-stat-num">7,000<small>名+</small></div><div class="hero-stat-label">会員数</div></div>
+                        <div class="hero-stat"><div class="hero-stat-num">0<small>円</small></div><div class="hero-stat-label">お見合い料</div></div>
+                        <div class="hero-stat"><div class="hero-stat-num">無制限</div><div class="hero-stat-label">お見合い回数</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+    <div class="container">
+        <div class="trust-bar-inner">
+            <div class="trust-item">
+                <div class="trust-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+                <div class="trust-num">7,000<small>名+</small></div>
+                <div class="trust-label">会員ネットワーク</div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+                <div class="trust-num">0<small>円</small></div>
+                <div class="trust-label">お見合い料（何度でも）</div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+                <div class="trust-num">無制限</div>
+                <div class="trust-label">お見合い回数</div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+                <div class="trust-num">代理入会<small>OK</small></div>
+                <div class="trust-label">親御さんの代理入会可能</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- PERSONA -->
+<section class="section section-white">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">あなたは一人ではありません</span>
+            <h2 class="section-title">こんな方が活動されています</h2>
+            <p class="section-sub">グッドマッチには、さまざまな想いを持った方が入会されています。</p>
+        </div>
+        <div class="persona-grid">
+            <div class="persona-card">
+                <div class="persona-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#5aaec4" stroke-width="1.8" stroke-linecap="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+                <h4>「仕事が落ち着いたので、そろそろ…」</h4>
+                <p>キャリアを優先してきたけれど、人生のパートナーを見つけたいと思い始めた方。</p>
+            </div>
+            <div class="persona-card">
+                <div class="persona-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#5aaec4" stroke-width="1.8" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+                <h4>「息子・娘の幸せを願って」</h4>
+                <p>お子さまに代わってお相手を探されている親御さん。代理入会も承っております。</p>
+            </div>
+            <div class="persona-card">
+                <div class="persona-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#5aaec4" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div>
+                <h4>「日常に出会いの場がない…」</h4>
+                <p>職場と自宅の往復で出会いがなく、真剣に結婚を考える相手と出会いたい方。</p>
+            </div>
+        </div>
+        <div class="persona-message">
+            <p>人生における<span style="color:var(--sky-dark); border-bottom: 2px solid var(--sky); padding-bottom:2px;">一番のチャンスは「今」</span>です。<br>グッドマッチは、結婚したいあなたの強力な味方です。</p>
+        </div>
+    </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section section-pale" id="testimonials">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">実際にご成婚された方々</span>
+            <h2 class="section-title">成婚者の声</h2>
+            <p class="section-sub">グッドマッチで出会い、幸せを掴んだ方々のエピソードです。</p>
+        </div>
+        <div class="testimonial-grid">
+            <div class="testimonial-card"><div class="testimonial-meta"><div class="testimonial-avatar">T</div><div class="testimonial-info"><div class="t-name">T.S さん</div><div class="t-detail">30代前半 男性 / 浜松市 / 入会半年でご成婚</div></div></div><blockquote>アプリや婚活パーティーを試しましたが、うまくいかず入会しました。「積極的に申し込もう」と背中を押してもらい、2月は毎週お見合いができました。毎晩電話をするうちに距離が縮まり、初めてお会いしてから2か月での成婚です。</blockquote><span class="testimonial-result"><svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>入会から約半年でご成婚</span></div>
+            <div class="testimonial-card"><div class="testimonial-meta"><div class="testimonial-avatar">K</div><div class="testimonial-info"><div class="t-name">K さん</div><div class="t-detail">40代 女性 / お見合いから1か月以内でご成婚</div></div></div><blockquote>なかなか良いご縁に恵まれずにいましたが、交際に進んでから毎日連絡を取り合いました。声を聞くたびに「この人だ」という気持ちが高まり、お見合いからわずか1か月たらずでご成婚。自分でも驚いています。</blockquote><span class="testimonial-result"><svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>お見合いから1か月以内でご成婚</span></div>
+            <div class="testimonial-card"><div class="testimonial-meta"><div class="testimonial-avatar">M</div><div class="testimonial-info"><div class="t-name">M さん</div><div class="t-detail">50代 女性 / 静岡市 / 交際約1か月でご成婚</div></div></div><blockquote>ご縁あって再入会し、今度こそと思っていました。「自分の近くに住んでもいい」という彼の一言に本気度を感じました。交際からわずか1か月ほどでの成婚。人生、何度でもやり直せると実感しています。</blockquote><span class="testimonial-result"><svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>交際約1か月でご成婚</span></div>
+            <div class="testimonial-card"><div class="testimonial-meta"><div class="testimonial-avatar">Y</div><div class="testimonial-info"><div class="t-name">Y さん</div><div class="t-detail">60代 男性 / 榛原郡 / じっくり活動してご成婚</div></div></div><blockquote>アドバイザーに「焦らず、でも諦めずに」と声をかけてもらい続けました。沼津市在住の女性と出会い、年齢を重ねたからこそわかる価値観の一致を感じました。諦めなくて本当に良かったです。</blockquote><span class="testimonial-result"><svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>じっくり活動してご成婚</span></div>
+            <div class="testimonial-card"><div class="testimonial-meta"><div class="testimonial-avatar">A</div><div class="testimonial-info"><div class="t-name">A さん</div><div class="t-detail">30代 女性 / 県西部 / はじめてのお見合いから成婚へ</div></div></div><blockquote>初めてのお見合いでホテルのラウンジが満席というハプニングがありました。でも二人で喫茶店を探しながら笑い合えて、かえって距離が縮まった気がします。アクシデントも悪くないものですね。</blockquote><span class="testimonial-result"><svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>はじめてのお見合いから成婚へ</span></div>
+            <div class="testimonial-card"><div class="testimonial-meta"><div class="testimonial-avatar">H</div><div class="testimonial-info"><div class="t-name">H さん</div><div class="t-detail">67歳 男性 / 東伊豆 / シニア婚活でご成婚</div></div></div><blockquote>「この年齢で相談所なんて」と最初は思っていました。でも熱海で待ち合わせ、喫茶店でお茶をしていたらなんと3時間も話し込んでいて。笑い声が絶えない時間でした。これからの人生を楽しく歩めるパートナーに出会えました。</blockquote><span class="testimonial-result"><svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>シニア婚活でご成婚</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section section-white" id="features">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">私たちの強み</span>
+            <h2 class="section-title">グッドマッチが選ばれる4つの理由</h2>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card"><div class="feature-num">01</div><h3>約7,000名の会員からご紹介</h3><p>経験豊かなアドバイザーが、あなたの希望条件を満たすお相手を毎月ご紹介。インターネットを利用してご自身で探すことも可能です。</p></div>
+            <div class="feature-card"><div class="feature-num">02</div><h3>安心の成功報酬制</h3><p>入会金・月会費は他社に比べリーズナブル。お見合いの回数制限もなく、お見合い料は一切いただきません。成婚に至った場合のみ成婚料を頂戴します。</p></div>
+            <div class="feature-card"><div class="feature-num">03</div><h3>徹底したプライバシー保護</h3><p>法令を遵守し、個人情報の管理・プライバシー保護を徹底。安心して婚活に取り組んでいただけます。ご両親の代理入会にも対応しています。</p></div>
+            <div class="feature-card"><div class="feature-num">04</div><h3>地元・藤枝の頼れるアドバイザー</h3><p>地域に根ざし、一人ひとりに寄り添った手厚いサポート。大手にはない距離の近さで、成婚まで一緒に歩みます。しつこい勧誘は一切ありません。</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- MID CTA -->
+<div class="mid-cta">
+    <div class="container">
+        <p>まずは気軽にご相談ください。無理な勧誘は一切ございません。</p>
+        <a href="#cta-phone" class="btn btn-sky">無料相談を予約する</a>
+    </div>
+</div>
+
+<!-- PLAN -->
+<section class="section section-sky" id="plan">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag light">大好評につき実施中</span>
+            <h2 class="section-title light">2か月間体験プラン</h2>
+            <p class="section-sub light">結婚相談所が初めての方でも、気軽に一歩を踏み出せる特別プランです。</p>
+        </div>
+        <div class="plan-header-price">
+            <div class="plan-price-box">
+                <div class="plan-price-main">2か月間 合計<strong>8,800</strong>円<small style="color:rgba(255,255,255,0.6);">（税込）</small></div>
+                <div class="plan-price-note">※このプランではインターネット検索機能はご利用いただけません。</div>
+            </div>
+        </div>
+        <div class="plan-steps">
+            <div class="plan-step">
+                <div class="step-num">01</div>
+                <div class="step-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+                <h4>プロフィールの郵送</h4>
+                <p>月に5〜10名程度、あなたの希望条件に合ったお相手の写真つきプロフィールを郵送いたします。</p>
+            </div>
+            <div class="plan-step">
+                <div class="step-num">02</div>
+                <div class="step-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+                <h4>お見合いの意向確認</h4>
+                <p>気になるお相手がいたら、弊社が相手方の仲人と連絡をとり、双方の意向を丁寧に確認します。</p>
+            </div>
+            <div class="plan-step">
+                <div class="step-num">03</div>
+                <div class="step-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+                <h4>お見合いセッティング</h4>
+                <p>相手もOKなら日程を調整してお見合い。お見合い料は一切いただきません。</p>
+            </div>
+        </div>
+        <div class="plan-after"><strong>【体験後について】</strong> 2か月経過後、引き続き活動をご希望の方には、ご自身でお相手をインターネット検索できるID・パスワードをお渡しします。</div>
+    </div>
+</section>
+
+<!-- PRICING -->
+<section class="section section-gray" id="pricing">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">明瞭な料金体系</span>
+            <h2 class="section-title">安心の料金システム</h2>
+            <p class="section-sub">追加料金なし。お見合い料0円。ご両親の代理入会も承ります。</p>
+        </div>
+        <div class="pricing-table">
+            <div class="price-group">
+                <div class="price-group-header">入会時に必要な費用（税別）</div>
+                <div class="price-row"><span class="price-label">入会金</span><span class="price-value">30,000<small>円</small></span></div>
+                <div class="price-row"><span class="price-label">登録料 <small style="color:var(--text-light);">（2年間有効）</small></span><span class="price-value">10,000<small>円</small></span></div>
+                <div class="price-row total"><span class="price-label bold">合計</span><span class="price-value" style="color:var(--sky-dark); font-size:22px;">40,000<small>円</small></span></div>
+            </div>
+            <div class="price-group">
+                <div class="price-group-header secondary">その他の費用（税別）</div>
+                <div class="price-row"><span class="price-label">月会費 <small style="color:var(--text-light);">情報提供・お見合いセッティング</small></span><span class="price-value">7,000<small>円</small></span></div>
+                <div class="price-row"><span class="price-label">成婚料</span><span class="price-value" style="color:var(--red-accent);">150,000<small>円</small></span></div>
+            </div>
+            <div class="price-zero">お見合い料は何度でも 0円 です</div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="section section-white" id="faq">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">不安を解消</span>
+            <h2 class="section-title">よくある質問</h2>
+        </div>
+        <div class="faq-list">
+            <div class="faq-item open">
+                <div class="faq-q" onclick="toggleFaq(this)"><div class="faq-q-label"><div class="faq-q-icon">Q</div><span>無料相談ではどんなことを聞けますか？</span></div><span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></span></div>
+                <div class="faq-a">結婚に関することなら何でもお気軽にご相談ください。サービスの流れ、料金、会員の雰囲気など、すべてお答えいたします。相談したからといって入会の義務はありません。しつこい勧誘も一切行いません。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)"><div class="faq-q-label"><div class="faq-q-icon">Q</div><span>体験プランと正規入会の違いは何ですか？</span></div><span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></span></div>
+                <div class="faq-a">体験プラン（8,800円/2か月）では、アドバイザーが選んだお相手のプロフィールを郵送でお届けします。正規入会ではそれに加え、インターネットでご自身によるお相手検索が可能になります。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)"><div class="faq-q-label"><div class="faq-q-icon">Q</div><span>どんな年齢層の方が多いですか？</span></div><span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></span></div>
+                <div class="faq-a">30代〜60代の方を中心に、幅広い年齢層の方にご利用いただいています。「もう遅いかも」と感じている方こそ、まずはお気軽にご相談ください。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)"><div class="faq-q-label"><div class="faq-q-icon">Q</div><span>親が代わりに入会することはできますか？</span></div><span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></span></div>
+                <div class="faq-a">はい、親御さんによる代理入会を承っております。お子さまに代わってアドバイザーと相談しながら、お相手探しを進めることが可能です。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)"><div class="faq-q-label"><div class="faq-q-icon">Q</div><span>プライバシーは守られますか？</span></div><span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></span></div>
+                <div class="faq-a">もちろんです。法令に基づき個人情報の管理・プライバシー保護を徹底しております。婚活中であることが周囲に知られることのないよう、細心の注意を払っています。</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta" id="cta">
+    <div class="container">
+        <div class="final-cta-inner">
+            <h2>人生が変わる出会いを、<br>ここから。</h2>
+            <p class="final-cta-sub">結婚に関することなら、何でもお気軽にご相談ください。<br>まずは無料相談で、あなたの想いをお聞かせください。</p>
+            <div class="cta-card">
+                <div class="cta-methods">
+                    <div>
+                        <p class="cta-tel-label">お電話でのご相談・ご予約</p>
+                        <a href="tel:054-689-0788" class="cta-phone" id="cta-phone">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+                            054-689-0788
+                        </a>
+                        <p class="cta-phone-sub">受付時間: 9:00〜18:00</p>
+                    </div>
+                    <div class="cta-divider">または</div>
+                    <a href="mailto:iyffzdshsx@i.softbank.jp" class="btn btn-sky" style="width:100%; padding:15px;">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+                        メールで無料相談を予約する
+                    </a>
+                </div>
+                <p class="cta-safety">しつこい勧誘・営業は一切行いません。安心してお問い合わせください。</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- COMPANY -->
+<section class="section section-gray" id="company">
+    <div class="container">
+        <div class="section-header"><h2 class="section-title">会社概要</h2></div>
+        <div class="company-grid">
+            <table class="company-table">
+                <tr><th>事業所名</th><td>結婚相談所 グッドマッチ</td></tr>
+                <tr><th>運営</th><td>クラシード藤枝</td></tr>
+                <tr><th>代表者</th><td>小澤 大翼</td></tr>
+                <tr><th>所在地</th><td>〒426-0025<br>静岡県藤枝市藤枝4-5-26</td></tr>
+                <tr><th>電話番号</th><td><a href="tel:054-689-0788" style="color:var(--gold); font-weight:700;">054-689-0788</a></td></tr>
+                <tr><th>メール</th><td><a href="mailto:iyffzdshsx@i.softbank.jp" style="color:var(--sky-dark); word-break:break-all;">iyffzdshsx@i.softbank.jp</a></td></tr>
+            </table>
+            <div class="affiliation-badges">
+                <div class="affiliation-badge"><svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>内閣府認定NPO法人 全国結婚相談業教育センター正会員</div>
+                <div class="affiliation-badge"><svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>日本仲人協会 加盟店</div>
+                <div class="affiliation-badge"><svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>ふじえだまちゼミ 加盟店</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-logo-wrap">
+            <svg width="26" height="26" viewBox="0 0 100 100"><circle cx="36" cy="50" r="20" fill="none" stroke="#92CEDD" stroke-width="10"/><circle cx="64" cy="50" r="20" fill="none" stroke="#C5A059" stroke-width="10"/></svg>
+            <span class="footer-logo-text">結婚相談所 グッドマッチ</span>
+        </div>
+        <p style="margin-bottom:6px;">静岡県藤枝市藤枝4-5-26 ／ TEL: 054-689-0788</p>
+        <p>&copy; 2026 グッドマッチ / クラシード藤枝. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- MOBILE FIXED CTA -->
+<div class="mobile-cta-bar" id="mobileCta">
+    <a href="tel:054-689-0788" class="btn btn-gold" style="font-size:13px; padding:12px 8px; gap:5px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>電話する
+    </a>
+    <a href="mailto:iyffzdshsx@i.softbank.jp" class="btn btn-sky" style="font-size:13px; padding:12px 8px; gap:5px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>メールで相談
+    </a>
+</div>
+
+<script>
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => { header.classList.toggle('scrolled', window.scrollY > 40); });
+
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    hamburger.addEventListener('click', () => { hamburger.classList.toggle('open'); mobileNav.classList.toggle('open'); });
+    function closeMenu() { hamburger.classList.remove('open'); mobileNav.classList.remove('open'); }
+    document.addEventListener('click', (e) => { if (!header.contains(e.target) && !mobileNav.contains(e.target)) closeMenu(); });
+
+    function toggleFaq(el) { el.parentElement.classList.toggle('open'); }
+
+    const obs = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => { entry.target.style.opacity='1'; entry.target.style.transform='translateY(0)'; }, i * 80);
+                obs.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.05 });
+    document.querySelectorAll('.feature-card,.persona-card,.testimonial-card,.plan-step').forEach(el => {
+        el.style.opacity='0'; el.style.transform='translateY(22px)'; el.style.transition='opacity 0.6s ease,transform 0.6s ease';
+        obs.observe(el);
+    });
+</script>
+</body>
+</html>
